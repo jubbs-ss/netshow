@@ -63,6 +63,14 @@
                 $('#email').val('');
             }
         }
+
+        function validaTelefone(){
+            var caracteresDigitados = $('#telefone').val().length;
+            if(caracteresDigitados < 10 || caracteresDigitados > 11){
+                alert('Digite um telefone válido');
+                $('#telefone').val('');
+            }
+        }
     </script>
 </body>
 

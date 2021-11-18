@@ -24,13 +24,13 @@
             <div class="col-sm-6  mt-4">
               <div class="input-group">
                 <span class="input-group-text">#</span>
-                <input type="text" class="form-control" name="telefone" placeholder="Insira seu Telefone" required>
+                <input type="text" onchange="validaTelefone()" id="telefone" class="form-control" name="telefone" placeholder="Insira seu Telefone" required>
               </div>
             </div>
 
             <div class="col-sm-12  mt-4">
               <label  class="form-label">Escreva sua mensagem</label>
-              <textarea  class="form-control" name="mensagem" required></textarea>
+              <textarea  class="form-control"  name="mensagem" required></textarea>
             </div>
 
             <div class="col-sm-12 mt-4">
