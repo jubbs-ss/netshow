@@ -16,10 +16,10 @@ class PessoaController extends Controller
      */
     public function index(Request $request)
     {
-        
+
         $pessoa = DB::table('pessoas')->paginate(2);
-        
-       
+
+
         return  view('pessoas',['pessoa' => $pessoa]);
 
     }
@@ -42,16 +42,16 @@ class PessoaController extends Controller
      */
     public function store(Request $request)
     {
-       
+
         $msg = '<h1>NOVO CLIENTE CADASTRADO NO SISTEMA</h1>
         <h4>DADOS DO CLIENTE</h4>
         Nome: '.$request->get('nome').'<br />
-        Email: '.$request->get('email').'
-        Telefone: '.$request->get('telefone').'
-        Mensagem: '.$request->get('Mensagem').'
-        ';    
+        Email: '.$request->get('email').'<br />
+        Telefone: '.$request->get('telefone').'<br />
+        Mensagem: '.$request->get('mensagem').'
+        ';
         //dd($msg);
-        \Illuminate\Support\Facades\Mail::send(new \App\Mail\SendMailUser(env('MAIL_FROM_ADDRESS'),env('MAIL_FROM_NAME'),$msg));
+        \Illuminate\Support\Facades\Mail::send(new \App\Mail\SendMailUser('analitico01@gmail.com',env('MAIL_FROM_NAME'),$msg));
         $pessoa = Pessoa::create($request->all());
         return redirect()->route('pessoa.show',['pessoa' => $pessoa->id]);
     }
@@ -71,7 +71,7 @@ class PessoaController extends Controller
 
         return view('meu-perfil',['dados' => $dados]);
 
-     
+
     }
     /**
      * Show the form for editing the specified resource.
