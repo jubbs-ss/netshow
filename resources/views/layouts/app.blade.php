@@ -34,7 +34,7 @@
         </main>
     </div>
     
-    
+    <script src="{{ env('APP_URL') }}/js/funcoes.js"></script>
     <script src="{{ env('APP_URL') }}/vendor/global/global.min.js"></script>
     <script src="{{ env('APP_URL') }}/js/quixnav-init.js"></script>
     <script src="{{ env('APP_URL') }}/js/jquery.printelement.js"></script>

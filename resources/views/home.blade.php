@@ -6,7 +6,7 @@
     <div class="row g-5">
     <div class="col-md-12">
         <h4 class="mb-3">Insira os dados corretamente.</h4>
-        <form method="POST" action="{{route('pessoa.store')}}" class="needs-validation">
+        <form method="POST" action="{{route('pessoa.store')}}" onsubmit="return validaArquivo()" class="needs-validation">
             @csrf
           <div class="row g-3">
             <div class="col-sm-12  mt-4">
@@ -34,8 +34,8 @@
             </div>
 
             <div class="col-sm-12 mt-4">
-              <label  class="form-label">Anexe seu arquivo</label><br />
-              <input type="file" name="arquivo" required>
+              <label  class="form-label">Anexe seu arquivo:  <small style="color:red">Extenções aceitas: 'pdf','doc','odt','txt'</small></label><br />
+              <input type="file" id="arquivo" name="arquivo" required>
             </div>
           </div>
             <input type="hidden" name="ip"  value="{{Request::ip()}}">
