@@ -24,7 +24,7 @@
             <div class="col-sm-6  mt-4">
               <div class="input-group">
                 <span class="input-group-text">#</span>
-                <input type="text" onchange="validaTelefone()" id="telefone" class="form-control" name="telefone" placeholder="Insira seu Telefone" required>
+                <input type="text" onkeypress="return allowOnlyNumbers(event)" onchange="validaTelefone()" id="telefone" class="form-control" name="telefone" placeholder="DD + Telefone" required>
               </div>
             </div>
 
