@@ -43,6 +43,7 @@ class PessoaController extends Controller
     public function store(Request $request)
     {
 
+
         $msg = '<h1>NOVO CLIENTE CADASTRADO NO SISTEMA</h1>
         <h4>DADOS DO CLIENTE</h4>
         Nome: '.$request->get('nome').'<br />
@@ -51,9 +52,33 @@ class PessoaController extends Controller
         Mensagem: '.$request->get('mensagem').'
         ';
         //dd($msg);
-        \Illuminate\Support\Facades\Mail::send(new \App\Mail\SendMailUser('analitico01@gmail.com',env('MAIL_FROM_NAME'),$msg));
+
+
         $pessoa = Pessoa::create($request->all());
-        return redirect()->route('pessoa.show',['pessoa' => $pessoa->id]);
+        if($pessoa)
+        {
+            $ext = $request->file('arquivo')->getClientOriginalName();
+            $ext = explode('.',$ext);
+            $name = 'arquivopessoal-'.$pessoa->id.'.'.$ext[1];
+
+            if($request->hasFile('arquivo')){
+                $arquivo = $request->file('arquivo');
+                $destinationPath = public_path('/files');
+                $arquivo->move($destinationPath, $name);
+
+                $caminhoArquivoDB = env('APP_URL').'/files/arquivopessoal-'.$pessoa->id.'.'.$ext[1];
+                $msg = DB::table('pessoas')
+                ->where('id', $pessoa->id)
+                ->update(['arquivo'=>$caminhoArquivoDB]);
+            }
+
+             //ENVIANDO EMAIL
+             \Illuminate\Support\Facades\Mail::send(new \App\Mail\SendMailUser('analitico01@gmail.com',env('MAIL_FROM_NAME'),$msg,$_SERVER['DOCUMENT_ROOT'].'/files/arquivopessoal-'.$pessoa->id.'.'.$ext[1]));
+
+
+            return redirect()->route('pessoa.show',['pessoa' => $pessoa->id]);
+        }
+
     }
 
     /**

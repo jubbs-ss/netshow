@@ -22,7 +22,7 @@
 
 <body>
 <body class="bg-light">
-    
+
     <div class="container">
         <main>
             <div class="py-5 text-center">
@@ -33,13 +33,37 @@
             @yield('content')
         </main>
     </div>
-    
+
     <script src="{{ env('APP_URL') }}/js/funcoes.js"></script>
     <script src="{{ env('APP_URL') }}/vendor/global/global.min.js"></script>
     <script src="{{ env('APP_URL') }}/js/quixnav-init.js"></script>
     <script src="{{ env('APP_URL') }}/js/jquery.printelement.js"></script>
     <script src="{{ env('APP_URL') }}/js/custom.min.js"></script>
+    <script>
+        function validaArquivo(){
+            if($('#arquivo').val() == '')
+            {
+                alert('OOOPS, é necessário que você suba um arquivo.');
+                return false;
+            }
+            var ext = $('#arquivo').val().split('.').pop().toLowerCase();
+            if($.inArray(ext, ['pdf','doc','odt','txt']) == -1) {
+                alert('OOOPS, extensão doarquivo inválida');
+                return false;
+            }
 
+            return;
+        }
+
+        function validateEmail() {
+            const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            if(! re.test(String($('#email').val()).toLowerCase()))
+            {
+                alert('É necessário que o preenchimento seja um email válido');
+                $('#email').val('');
+            }
+        }
+    </script>
 </body>
 
 </html>
