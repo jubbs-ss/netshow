@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Pessoa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use DB;
 
 class PessoaController extends Controller
@@ -15,10 +16,10 @@ class PessoaController extends Controller
      */
     public function index(Request $request)
     {
-
-        $pessoa = DB::table('pessoas')
-            ->paginate(2);
-
+        
+        $pessoa = DB::table('pessoas')->paginate(2);
+        
+       
         return  view('pessoas',['pessoa' => $pessoa]);
 
     }
@@ -41,7 +42,16 @@ class PessoaController extends Controller
      */
     public function store(Request $request)
     {
-        
+       
+        $msg = '<h1>NOVO CLIENTE CADASTRADO NO SISTEMA</h1>
+        <h4>DADOS DO CLIENTE</h4>
+        Nome: '.$request->get('nome').'<br />
+        Email: '.$request->get('email').'
+        Telefone: '.$request->get('telefone').'
+        Mensagem: '.$request->get('Mensagem').'
+        ';    
+        //dd($msg);
+        \Illuminate\Support\Facades\Mail::send(new \App\Mail\SendMailUser(env('MAIL_FROM_ADDRESS'),env('MAIL_FROM_NAME'),$msg));
         $pessoa = Pessoa::create($request->all());
         return redirect()->route('pessoa.show',['pessoa' => $pessoa->id]);
     }
