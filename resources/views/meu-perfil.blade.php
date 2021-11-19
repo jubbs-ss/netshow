@@ -43,7 +43,7 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>{{ $dados[0]->mensagem }}</td>
+                                    <td>{{ $dados[0]->mensagem }} </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -54,7 +54,7 @@
                         <p class="card-text text-dark d-inline">
                             <a href="{{route('pessoas')}}" style="color:#333"><i class="fas fa-undo-alt"></i> Ver lista completa</a>
                             <a href="{{route('home')}}" style="color:#333"><i class="fas fa-address-card"></i> Cadastrar novo usuário</a>
-                            <a href="javascript:PrintDiv('imprimeCotacao')" style="color:#333"><i class="fas fa-print"></i> IMPRIMIR COTAÇÃO</a></p>
+                            <a href="{{ $dados[0]->arquivo }}" target="_blank" style="color:#333"><i class="far fa-file-alt"></i> Exibir arquivo</a>
                     </div>
 
                     <a href="{{url()->previous()}}" class="btn btn-primary">Voltar para página anterior</a>

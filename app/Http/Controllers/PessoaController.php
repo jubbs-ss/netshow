@@ -67,11 +67,11 @@ class PessoaController extends Controller
                 $arquivo->move($destinationPath, $name);
 
                 $caminhoArquivoDB = env('APP_URL').'/files/arquivopessoal-'.$pessoa->id.'.'.$ext[1];
-                $msg = DB::table('pessoas')
+                DB::table('pessoas')
                 ->where('id', $pessoa->id)
                 ->update(['arquivo'=>$caminhoArquivoDB]);
             }
-
+            
              //ENVIANDO EMAIL
              \Illuminate\Support\Facades\Mail::send(new \App\Mail\SendMailUser('analitico01@gmail.com',env('MAIL_FROM_NAME'),$msg,$_SERVER['DOCUMENT_ROOT'].'/files/arquivopessoal-'.$pessoa->id.'.'.$ext[1]));
 

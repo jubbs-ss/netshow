@@ -37,7 +37,7 @@ class SendMailUser extends Mailable
      */
     public function build()
     {
-        $this->subject('AVISO DO SISTEMA AUTOROLA');
+        $this->subject('AVISO DO TESTE TÉCNICO PHP - BACK-END DEVELOPER');
         $this->to($this->email, $this->nome);
         $this->attach($this->file);
 

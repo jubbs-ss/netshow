@@ -34,7 +34,7 @@
             </div>
 
             <div class="col-sm-12 mt-4">
-              <label  class="form-label">Anexe seu arquivo:  <small style="color:red">Extenções aceitas: 'pdf','doc','odt','txt'</small></label><br />
+              <label  class="form-label">Anexe seu arquivo:  <small style="color:red">Extenções aceitas: 'pdf','doc','odt','txt' - <b>TAMANHO MAXIMO DO ARQUIVO 500kb</b></small></label><br />
               <input type="file" id="arquivo" name="arquivo" required>
             </div>
           </div>
