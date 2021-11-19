@@ -1,5 +1,4 @@
 function validaArquivo(){
-    alert(('#arquivo').files.size);
     if($('#arquivo').val() == '')
     {
         alert('OOOPS, é necessário que você suba um arquivo.');
