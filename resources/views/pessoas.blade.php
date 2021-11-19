@@ -26,18 +26,7 @@
                                         <td>({{ $res->ip }}) </td>
                                         
                                         <td style="width:60px">
-                                            <a title="Editar registro" href="{{ route('pessoa.edit',$res->id) }}"><i class="fas fa-edit"></i></a>
                                             <a title="Ver registro" href="{{ route('pessoa.show',$res->id) }}"><i class="fas fa-eye"></i></a>
-
-                                        <form id="form_{{ $res->id}}"
-                                        action="{{ route('pessoa.destroy', ['pessoa' => $res->id]) }}"
-                                        method="POST">
-                                        @method('DELETE')
-                                        @csrf
-                                        </form>
-                                            <a title="Excluir registro" href="#"
-                                            onclick="document.getElementById('form_{{ $res->id}}').submit()"><i class="fas fa-trash-alt"></i> </a>
-
                                         </td>
                                     </tr>
                                     @endforeach
