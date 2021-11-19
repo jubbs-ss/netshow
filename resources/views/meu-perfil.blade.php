@@ -49,12 +49,31 @@
                         </table>
                     </div>
                 </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">MEU ARQUIVO</h5>
+                    </div>
+                    <div class="card-body">
+                        <table id="example" class="display" style="min-width: 845px">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><a href="{{ $dados[0]->arquivo }}" target="_blank" style="color:#333"><i class="far fa-file-alt"></i> {{ $dados[0]->arquivo }}</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
                 <div class="card-footer d-sm-flex justify-content-between">
                     <div class="card-footer-link mb-4 mb-sm-0">
                         <p class="card-text text-dark d-inline">
                             <a href="{{route('pessoas')}}" style="color:#333"><i class="fas fa-undo-alt"></i> Ver lista completa</a>
                             <a href="{{route('home')}}" style="color:#333"><i class="fas fa-address-card"></i> Cadastrar novo usuário</a>
-                            <a href="{{ $dados[0]->arquivo }}" target="_blank" style="color:#333"><i class="far fa-file-alt"></i> Exibir arquivo</a>
+
                     </div>
 
                     <a href="{{url()->previous()}}" class="btn btn-primary">Voltar para página anterior</a>

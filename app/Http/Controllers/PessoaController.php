@@ -59,21 +59,22 @@ class PessoaController extends Controller
         {
             $ext = $request->file('arquivo')->getClientOriginalName();
             $ext = explode('.',$ext);
-            $name = 'arquivopessoal-'.$pessoa->id.'.'.$ext[1];
+            $ext = end($ext);
+            $name = 'arquivopessoal-'.$pessoa->email.'.'.$ext;
 
             if($request->hasFile('arquivo')){
                 $arquivo = $request->file('arquivo');
                 $destinationPath = public_path('/files');
                 $arquivo->move($destinationPath, $name);
 
-                $caminhoArquivoDB = env('APP_URL').'/files/arquivopessoal-'.$pessoa->id.'.'.$ext[1];
+                $caminhoArquivoDB = env('APP_URL').'/files/arquivopessoal-'.$pessoa->email.'.'.$ext;
                 DB::table('pessoas')
                 ->where('id', $pessoa->id)
                 ->update(['arquivo'=>$caminhoArquivoDB]);
             }
-            
+
              //ENVIANDO EMAIL
-             \Illuminate\Support\Facades\Mail::send(new \App\Mail\SendMailUser('analitico01@gmail.com',env('MAIL_FROM_NAME'),$msg,$_SERVER['DOCUMENT_ROOT'].'/files/arquivopessoal-'.$pessoa->id.'.'.$ext[1]));
+             \Illuminate\Support\Facades\Mail::send(new \App\Mail\SendMailUser('analitico01@gmail.com',env('MAIL_FROM_NAME'),$msg,$_SERVER['DOCUMENT_ROOT'].'/files/arquivopessoal-'.$pessoa->email.'.'.$ext));
 
 
             return redirect()->route('pessoa.show',['pessoa' => $pessoa->id]);

@@ -5,8 +5,9 @@ namespace Tests\Browser;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
+use Faker\Factory;
 
-class ExampleTest extends DuskTestCase
+class testForm extends DuskTestCase
 {
     public function testAddRegisterSuccess()
     {
@@ -18,17 +19,20 @@ class ExampleTest extends DuskTestCase
             $email = $faker->email;
             $phone = $faker->phone;
             $msg = '$faker->phone';
-
-            // ->attach('input.arquivo', storage_path('app/public/files/arquivopessoal-9.pdf'));
+            $filePath = 'https://netshow.test/files/arquivopessoal-'.$email.'.pdf';
 
             $browser->visit('/') // Acessa a rota que de cadastro
-                ->type('nome', $name) // Preenche nome
-                ->type('email', $email) // Preenche email
-                ->type('telefone', $phone) // Preenche email
+                ->attach('input.arquivo', 'C:\laragon\www\netshow\public\files\teste.pdf')
+                ->type('input.nome', $name) // Preenche nome
+                ->type('input.email', $email) // Preenche email
+                ->type('input.telefone', '1146530330') // Preenche email
+                ->type('textarea.mensagem', $msg) // Preenche email
                 ->press('Salvar dados') // Clica em "Salvar"
+                ->assertSee($filePath) // Testa se o email preenchido está na lista
                 ->assertSee($name) // Testa se o nome preenchido está na lista
-                ->assertSee($email); // Testa se o email preenchido está na lista
-                ->assertSee($phone); // Testa se o email preenchido está na lista
+                ->assertSee($email) // Testa se o email preenchido está na lista
+                ->assertSee('1146530330') // Testa se o email preenchido está na lista
+                ->assertSee($msg); // Testa se o email preenchido está na lista
         });
     }
 }
